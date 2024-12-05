@@ -1,5 +1,6 @@
 <template>
-  <div class="book-item" v-if="book">
+  <div class="book-item"
+       v-if="book">
     <h3>{{ book.title }}</h3>
     <p>Autor: {{ book.author }}</p>
   </div>
