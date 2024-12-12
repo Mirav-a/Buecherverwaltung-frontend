@@ -21,7 +21,8 @@ export default {
 <template>
   <div class="book-list">
     <h1>Bücherliste</h1>
-    <div v-for="book in books" :key="book.id">
+    <div
+      v-for="book in books" :key="book.id">
       <BookItem :book="book" />
     </div>
   </div>
