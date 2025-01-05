@@ -1,33 +1,30 @@
-<template>
-  <div class="book-item"
-       v-if="book">
-    <h3>{{ book.title }}</h3>
-    <p>Autor: {{ book.author }}</p>
-  </div>
-  <div v-else>
-    <p>Keine Buchdaten verfügbar</p>
-  </div>
-</template>
-
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent } from 'vue';
+import type { PropType } from 'vue';
+
+// Typ für ein Buch
+type Book = Record<string, any> | null;
 
 export default defineComponent({
-  name: 'BookItem',
+  name: "BookItem",
   props: {
     book: {
-      type: Object,
-      required: false, // Prop ist nicht zwingend erforderlich
-      default: () => ({ title: 'Unbekannter Titel', author: 'Unbekannter Autor' }),
+      type: Object as PropType<Book>, // `null` wird explizit erlaubt
+      required: false,
+      default: null, // Standardwert ist null
     },
   },
-})
+});
 </script>
 
-<style scoped>
-.book-item {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-</style>
+<template>
+  <div class="book-item">
+    <template v-if="book">
+      <h3>{{ book.title }}</h3>
+      <p>Autor: {{ book.author }}</p>
+    </template>
+    <template v-else>
+      <p>Keine Buchdaten verfügbar</p>
+    </template>
+  </div>
+</template>
