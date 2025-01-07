@@ -8,9 +8,10 @@ import axios from 'axios';
 const apiEndpoint = import.meta.env.VITE_APP_BACKEND_BASE_URL + '/api/books';
 
 // Datenzustand
-const books = ref<{ id: number; title: string; author: string }[]>([]);
+const books = ref<{ id: number; title: string; author: string; price: number}[]>([]);
 const inputTitle = ref('');
 const inputAuthor = ref('');
+const inputPrice = ref('0');
 
 // Buch hinzufügen
 async function addBook() {
@@ -23,10 +24,13 @@ async function addBook() {
     const response = await axios.post(apiEndpoint, {
       title: inputTitle.value,
       author: inputAuthor.value,
-    });
+      price: inputPrice.value
+    }
+    );
     books.value.push(response.data);
-    inputTitle.value = '';
+    inputTitle.value = ''
     inputAuthor.value = '';
+    inputPrice.value = '0';
   } catch (err) {
     console.error('Fehler beim Hinzufügen des Buchs:', err);
   }
@@ -69,6 +73,7 @@ onMounted(async () => {
       <h2>Neues Buch hinzufügen</h2>
       <input v-model="inputTitle" placeholder="Buchtitel" />
       <input v-model="inputAuthor" placeholder="Autor" />
+      <input v-model="inputPrice" placeholder="Price" />
       <button @click="addBook">Hinzufügen</button>
     </div>
   </main>

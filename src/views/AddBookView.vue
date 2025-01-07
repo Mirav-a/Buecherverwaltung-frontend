@@ -1,22 +1,46 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import axios from 'axios';
 
 // Lokale Variablen für Formularwerte
 const title = ref('');
 const author = ref('');
+const price = ref('0');
 
-function addBook() {
+// Your backend API URL
+const apiUrl = import.meta.env.VITE_APP_BACKEND_BASE_URL + '/api/books'; // Change to your actual backend URL
+
+async function addBook() {
   if (!title.value || !author.value) {
     alert('Bitte Titel und Autor eingeben!');
     return;
   }
 
-  // Hier kannst du die Logik zum Speichern eines Buchs implementieren, z. B. über eine API
-  console.log('Neues Buch hinzugefügt:', { title: title.value, author: author.value });
+  // Create book object to send to the backend
+  const book = {
+    title: title.value,
+    author: author.value,
+    price: 0, // Example value, you can add this to the form as needed
+  };
 
-  // Formular zurücksetzen
-  title.value = '';
-  author.value = '';
+  try {
+    // Send the POST request to your backend
+    const response = await axios.post(apiUrl, book);
+
+    // Handle the response from the backend
+    console.log('Neues Buch hinzugefügt:', response.data);
+
+    // Optional: Notify user that the book was successfully added
+    alert('Buch wurde hinzugefügt!');
+
+    // Reset the form
+    title.value = '';
+    author.value = '';
+    price.value = '0';
+  } catch (error) {
+    console.error('Fehler beim Hinzufügen des Buches:', error);
+    alert('Beim Hinzufügen des Buches ist ein Fehler aufgetreten.');
+  }
 }
 </script>
 
@@ -33,7 +57,10 @@ function addBook() {
         <label for="author">Autor</label>
         <input id="author" v-model="author" placeholder="Autor eingeben" />
       </div>
-
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input type="number" id="price" v-model="price" placeholder="price eingeben" />
+      </div>
       <button type="submit" class="submit-button">Hinzufügen</button>
     </form>
   </div>

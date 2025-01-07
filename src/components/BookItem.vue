@@ -17,7 +17,7 @@ defineProps({
   <div>
     <!-- Wenn Buchdaten vorhanden -->
     <div v-if="book">
-      <p><strong>{{ book.title }}</strong> - {{ book.author }}</p>
+      <p><strong>{{ book.title }}</strong> - {{ book.author }} - {{ book.price }}</p>
     </div>
     <!-- Wenn keine Buchdaten vorhanden -->
     <div v-else>
