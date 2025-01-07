@@ -1,15 +1,22 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div>
+    <h1>Über diese Anwendung</h1>
+    <p>Diese Anwendung hilft Ihnen, Ihre Bücher zu organisieren. Sie können Bücher hinzufügen, anzeigen und verwalten.</p>
   </div>
 </template>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
+<script setup lang="ts">
+// Keine spezielle Logik notwendig
+</script>
+
+<style scoped>
+h1 {
+  font-size: 2rem;
+  color: #333;
+}
+
+p {
+  font-size: 1rem;
+  color: #666;
 }
 </style>

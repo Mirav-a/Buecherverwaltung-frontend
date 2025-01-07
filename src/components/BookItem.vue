@@ -1,30 +1,34 @@
-<script lang="ts">
-import { defineComponent } from 'vue';
-import type { PropType } from 'vue';
+<script setup lang="ts">
+import { defineProps } from 'vue';
+import type { PropType } from 'vue'; // Type-only Import
+import type { Book } from '@/model/book'; // Type-only Import
 
-// Typ für ein Buch
-type Book = Record<string, any> | null;
-
-export default defineComponent({
-  name: "BookItem",
-  props: {
-    book: {
-      type: Object as PropType<Book>, // `null` wird explizit erlaubt
-      required: false,
-      default: null, // Standardwert ist null
-    },
+// Props definieren, wobei book auch `null` sein darf
+defineProps({
+  book: {
+    type: Object as PropType<Book | null>, // Akzeptiert sowohl `Book` als auch `null`
+    required: false, // Nicht erforderlich
+    default: null, // Standardwert ist `null`
   },
 });
 </script>
 
 <template>
-  <div class="book-item">
-    <template v-if="book">
-      <h3>{{ book.title }}</h3>
-      <p>Autor: {{ book.author }}</p>
-    </template>
-    <template v-else>
+  <div>
+    <!-- Wenn Buchdaten vorhanden -->
+    <div v-if="book">
+      <p><strong>{{ book.title }}</strong> - {{ book.author }}</p>
+    </div>
+    <!-- Wenn keine Buchdaten vorhanden -->
+    <div v-else>
       <p>Keine Buchdaten verfügbar</p>
-    </template>
+    </div>
   </div>
 </template>
+
+<style scoped>
+p {
+  font-size: 1rem;
+  margin: 5px 0;
+}
+</style>

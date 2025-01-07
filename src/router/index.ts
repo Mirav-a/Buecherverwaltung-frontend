@@ -1,36 +1,42 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import BookList from '../components/BookList.vue'
-import BookItem from '../components/BookItem.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import HomeView from '@/views/HomeView.vue';
+import AboutView from '@/views/AboutView.vue';
+import BookListView from '@/views/BookListView.vue';
+import AddBookView from '@/views/AddBookView.vue';
+import BookDetailView from '@/views/BookDetailView.vue';
+
+const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: HomeView,
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: AboutView,
+  },
+  {
+    path: '/books',
+    name: 'BookList',
+    component: BookListView,
+  },
+  {
+    path: '/add-book',
+    name: 'AddBook',
+    component: AddBookView,
+  },
+  {
+    path: '/books/:id',
+    name: 'BookDetail',
+    component: BookDetailView,
+    props: true, // Ermöglicht das Übergeben von Parametern an die Komponente
+  },
+];
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: HomeView,
-    },
-    {
-      path: '/books',
-      name: 'books',
-      component: BookList,
-    },
-    {
-      path: '/books/:id',
-      name: 'book-item',
-      component: BookItem,
-      props: true,
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue'),
-    },
-  ],
-})
+  history: createWebHistory(),
+  routes,
+});
 
-export default router
+export default router;
