@@ -1,11 +1,16 @@
 import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 import BookItem from '../BookItem.vue';
+import type { Book } from '@/model/book';
 
-describe('BookItem', () => {
+describe('BookItem.vue', () => {
   it('renders book information properly', () => {
-    const book = { id: 1, title: 'Der Herr der Ringe', author: 'J.R.R. Tolkien' };
-
+    const book: Book = {
+      id: 1,
+      title: 'Der Herr der Ringe',
+      author: 'J.R.R. Tolkien',
+      price: 15.99, // Füge den Preis hinzu
+    };
     const wrapper = mount(BookItem, {
       props: { book },
     });
