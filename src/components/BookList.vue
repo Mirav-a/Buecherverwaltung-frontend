@@ -8,7 +8,7 @@ const errorMessage = ref('');
 
 async function fetchBooks() {
   try {
-    const response = await axios.get('http://localhost:8080/api/books');
+    const response = await axios.get(import.meta.env.VITE_APP_BACKEND_BASE_URL+'/api/books');
     books.value = response.data;
   } catch (error) {
     console.error(error);

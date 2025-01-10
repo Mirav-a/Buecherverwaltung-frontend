@@ -21,7 +21,7 @@ const errorMessage = ref('');
 // Buchdetails laden
 async function fetchBookDetails() {
   try {
-    const response = await axios.get(`http://localhost:8080/api/books/${bookId}`); // Passe die API-URL an
+    const response = await axios.get(`http://localhost:5173/api/books/${bookId}`); // Passe die API-URL an
     book.value = response.data;
   } catch (error) {
     errorMessage.value = 'Fehler beim Laden der Buchdetails!';

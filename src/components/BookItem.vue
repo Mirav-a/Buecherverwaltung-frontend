@@ -28,6 +28,7 @@ defineProps({
 
 <style scoped>
 p {
+  color:black;
   font-size: 1rem;
   margin: 5px 0;
 }

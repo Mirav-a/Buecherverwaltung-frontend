@@ -7,7 +7,7 @@ function ThingList() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch('http://localhost:8080/api/things');
+        const response = await fetch('http://localhost:5173/api/things');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

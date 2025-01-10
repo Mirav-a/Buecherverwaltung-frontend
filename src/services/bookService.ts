@@ -2,7 +2,7 @@ import axios from 'axios';
 import type { Book } from '@/model/book';
 
 const apiClient = axios.create({
-  baseURL: 'http://localhost:8080/api', // Passe die URL an
+  baseURL: 'https://buecherverwaltung-booky.onrender.com/api/books', // Passe die URL an
   headers: {
     'Content-Type': 'application/json',
   },

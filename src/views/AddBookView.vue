@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue'
 import axios from 'axios';
 
 // Lokale Variablen für Formularwerte
@@ -8,7 +8,7 @@ const author = ref('');
 const price = ref('0');
 
 // Your backend API URL
-const apiUrl = import.meta.env.VITE_APP_BACKEND_BASE_URL + '/api/books'; // Change to your actual backend URL
+const apiUrl = import.meta.env.VITE_APP_BACKEND_BASE_URL+"/api/books"; // Change to your actual backend URL
 
 async function addBook() {
   if (!title.value || !author.value) {
@@ -33,15 +33,25 @@ async function addBook() {
     // Optional: Notify user that the book was successfully added
     alert('Buch wurde hinzugefügt!');
 
-    // Reset the form
+    // Formular zurücksetzen
     title.value = '';
     author.value = '';
     price.value = '0';
-  } catch (error) {
+  }
+    // Optional: Liste der Bücher aktualisieren, wenn in derselben Komponente
+    // await loadBooks();
+  catch (error) {
     console.error('Fehler beim Hinzufügen des Buches:', error);
     alert('Beim Hinzufügen des Buches ist ein Fehler aufgetreten.');
   }
+
 }
+
+onMounted(() => {
+  console.log(apiUrl)
+  console.log(import.meta.env.VITE_APP_BACKEND_BASE_URL)
+});
+
 </script>
 
 <template>

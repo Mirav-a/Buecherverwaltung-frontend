@@ -13,10 +13,12 @@
 h1 {
   font-size: 2rem;
   color: #333;
+  text-align: center;
 }
 
 p {
   font-size: 1rem;
   color: #666;
+  text-align: center;
 }
 </style>

@@ -5,7 +5,7 @@ import { ref, onMounted } from 'vue';
 import axios from 'axios';
 
 // API-Endpunkt
-const apiEndpoint = import.meta.env.VITE_APP_BACKEND_BASE_URL + '/api/books';
+const apiEndpoint = import.meta.env.VITE_APP_BACKEND_BASE_URL+ "/api/books";
 
 // Datenzustand
 const books = ref<{ id: number; title: string; author: string; price: number}[]>([]);
@@ -22,10 +22,10 @@ async function addBook() {
 
   try {
     const response = await axios.post(apiEndpoint, {
-      title: inputTitle.value,
-      author: inputAuthor.value,
-      price: inputPrice.value
-    }
+        title: inputTitle.value,
+        author: inputAuthor.value,
+        price: inputPrice.value
+      }
     );
     books.value.push(response.data);
     inputTitle.value = ''
@@ -53,8 +53,27 @@ onMounted(async () => {
     books.value = response.data;
   } catch (err) {
     console.error('Fehler beim Laden der Bücher:', err);
+    loadBooks();
   }
+  // Funktion, um Bücher zu laden
+  async function loadBooks() {
+    try {
+      const response = await axios.get(apiEndpoint);
+      console.log("API response:", response);
+      books.value = response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        // Axios-spezifische Fehlermeldung
+        console.error("Fehler:", error.response?.data || error.message);
+      } else {
+        // Allgemeiner Fehler
+        console.error("Fehler:", (error as Error).message);
+      }
+    }
+  }
+
 });
+
 </script>
 
 <template>
@@ -69,12 +88,24 @@ onMounted(async () => {
       />
     </ul>
 
-    <div>
+    <div class="add-book">
       <h2>Neues Buch hinzufügen</h2>
-      <input v-model="inputTitle" placeholder="Buchtitel" />
-      <input v-model="inputAuthor" placeholder="Autor" />
-      <input v-model="inputPrice" placeholder="Price" />
-      <button @click="addBook">Hinzufügen</button>
+      <form @submit.prevent="addBook" class="add-book-form">
+        <div class="form-group">
+          <label for="title">Titel</label>
+          <input id="title" v-model="inputTitle" placeholder="Titel eingeben" />
+        </div>
+
+        <div class="form-group">
+          <label for="author">Autor</label>
+          <input id="author" v-model="inputAuthor" placeholder="Autor eingeben" />
+        </div>
+        <div class="form-group">
+          <label for="price">Price</label>
+          <input type="number" id="price" v-model="inputPrice" placeholder="price eingeben" />
+        </div>
+        <button type="submit" class="submit-button">Hinzufügen</button>
+      </form>
     </div>
   </main>
 </template>
@@ -83,9 +114,55 @@ onMounted(async () => {
 main {
   padding: 20px;
 }
+
+.add-book {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #555;
+}
+
+input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.submit-button {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #4caf50;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.submit-button:hover {
+  background-color: #45a049;
+}
+
 h1 {
   color: #42b983;
 }
+
 ul {
   list-style-type: none;
   padding: 0;
