@@ -20,7 +20,7 @@ async function addBook() {
   const book = {
     title: title.value,
     author: author.value,
-    price: 0, // Example value, you can add this to the form as needed
+    price: price.value, // Example value, you can add this to the form as needed
   };
 
   try {
