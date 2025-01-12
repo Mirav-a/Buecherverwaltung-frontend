@@ -3,7 +3,7 @@ import HomeView from '@/views/HomeView.vue';
 import AboutView from '@/views/AboutView.vue';
 import BookListView from '@/views/BookListView.vue';
 import AddBookView from '@/views/AddBookView.vue';
-import BookDetailView from '@/views/BookDetailView.vue';
+
 
 const routes = [
   {
@@ -25,12 +25,6 @@ const routes = [
     path: '/add-book',
     name: 'AddBook',
     component: AddBookView,
-  },
-  {
-    path: '/books/:id',
-    name: 'BookDetail',
-    component: BookDetailView,
-    props: true, // Ermöglicht das Übergeben von Parametern an die Komponente
   },
 ];
 
