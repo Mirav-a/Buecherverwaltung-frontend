@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import BookItem from '../components/BookItem.vue';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue'
 
 import axios from 'axios';
 
@@ -12,6 +12,13 @@ const books = ref<{ id: number; title: string; author: string; price: number}[]>
 const inputTitle = ref('');
 const inputAuthor = ref('');
 const inputPrice = ref('0');
+const searchQuery = ref('');
+const filteredBooks = computed(() =>
+  {
+    return books.value.filter(book => book.title.toLowerCase().includes(
+      searchQuery.value.toLowerCase())
+    );
+  });
 
 // Buch hinzufügen
 async function addBook() {
@@ -79,16 +86,17 @@ onMounted(async () => {
 <template>
   <main>
     <h1>Bücherliste</h1>
+    <input v-model="searchQuery" placeholder="Titel filtern" />
     <ul>
       <BookItem
-        v-for="book in books"
+        v-for="book in filteredBooks"
         :key="book.id"
         :book="book"
         @remove="removeBook"
       />
     </ul>
 
-    <div class="add-book">
+    <!--   <div class="add-book">
       <h2>Neues Buch hinzufügen</h2>
       <form @submit.prevent="addBook" class="add-book-form">
         <div class="form-group">
@@ -106,7 +114,7 @@ onMounted(async () => {
         </div>
         <button type="submit" class="submit-button">Hinzufügen</button>
       </form>
-    </div>
+    </div> -->
   </main>
 </template>
 

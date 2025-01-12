@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
 import type { PropType } from 'vue'; // Type-only Import
-import type { Book } from '@/model/book'; // Type-only Import
+import type { Book } from '@/model/book';
+import axios from 'axios' // Type-only Import
 
 // Props definieren, wobei book auch `null` sein darf
 defineProps({
@@ -11,6 +12,10 @@ defineProps({
     default: null, // Standardwert ist `null`
   },
 });
+const emit = defineEmits(['remove']);
+function removeBook(id: number) {
+  emit('remove', id);
+}
 </script>
 
 <template>
@@ -18,6 +23,7 @@ defineProps({
     <!-- Wenn Buchdaten vorhanden -->
     <div v-if="book">
       <p><strong>{{ book.title }}</strong> - {{ book.author }} - {{ book.price }}</p>
+      <button @click="removeBook(book.id)">Delete</button>
     </div>
     <!-- Wenn keine Buchdaten vorhanden -->
     <div v-else>
