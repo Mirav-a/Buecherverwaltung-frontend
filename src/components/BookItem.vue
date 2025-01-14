@@ -34,7 +34,7 @@ function removeBook(id: number) {
 
 <style scoped>
 p {
-  color:black;
+  color:#000000;
   font-size: 1rem;
   margin: 5px 0;
 }

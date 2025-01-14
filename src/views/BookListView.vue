@@ -155,7 +155,7 @@ input {
   width: 100%;
   padding: 0.75rem;
   background-color: #4caf50;
-  color: white;
+  color:#ffffff;
   font-weight: bold;
   border: none;
   border-radius: 4px;
