@@ -2,7 +2,7 @@
 import { defineProps } from 'vue';
 import type { PropType } from 'vue'; // Type-only Import
 import type { Book } from '@/model/book';
-import axios from 'axios' // Type-only Import
+
 
 // Props definieren, wobei book auch `null` sein darf
 defineProps({
