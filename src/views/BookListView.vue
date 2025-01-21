@@ -82,12 +82,11 @@ onMounted(async () => {
 });
 
 </script>
-
 <template>
   <main>
     <h1>Bücherliste</h1>
     <input v-model="searchQuery" placeholder="Titel filtern" />
-    <ul>
+    <ul class="book-container">
       <BookItem
         v-for="book in filteredBooks"
         :key="book.id"
@@ -119,6 +118,13 @@ onMounted(async () => {
 </template>
 
 <style scoped>
+.book-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Spacing between items */
+  margin: 5% 0;
+}
+
 main {
   padding: 20px;
 }
@@ -128,7 +134,7 @@ main {
   margin: 0 auto;
   padding: 2rem;
   background-color: #ffffff;
-  border-radius: 8px;
+  border-radius: 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
